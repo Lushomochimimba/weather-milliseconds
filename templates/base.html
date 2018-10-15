@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -7,22 +8,23 @@
     <meta name="description" content="Manhattan weather forecast in under 100ms">
     <meta property="og:email" content="julian@juliannorton.com">
     <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="style.css">
     <title>NYC Weather</title>
     <link rel="stylesheet" href="./main.css">
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             var lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
-            
+
             if (
-            "IntersectionObserver" in window &&
-            "IntersectionObserverEntry" in window &&
-            "intersectionRatio" in window.IntersectionObserverEntry.prototype
+                "IntersectionObserver" in window &&
+                "IntersectionObserverEntry" in window &&
+                "intersectionRatio" in window.IntersectionObserverEntry.prototype
             ) {
-                let lazyImageObserver = new IntersectionObserver(function(
-                entries,
-                observer
+                let lazyImageObserver = new IntersectionObserver(function (
+                    entries,
+                    observer
                 ) {
-                    entries.forEach(function(entry) {
+                    entries.forEach(function (entry) {
                         if (entry.isIntersecting) {
                             let lazyImage = entry.target;
                             lazyImage.src = lazyImage.dataset.src;
@@ -32,17 +34,19 @@
                         }
                     });
                 });
-                
-                lazyImages.forEach(function(lazyImage) {
+
+                lazyImages.forEach(function (lazyImage) {
                     lazyImageObserver.observe(lazyImage);
                 });
             }
         });
     </script>
 </head>
-<body id="weather-milliseconds">
+
+<body class="wrapper" id="weather-milliseconds">
     <main>
         {% block content %}{% endblock %}
     </main>
 </body>
+
 </html>
